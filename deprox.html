@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="deproxCss.css">
+  <title>DE-PROX</title>
+</head>
+
+<body>
+    <header class="header">
+      <div class="title">
+        <h2>Attendance Marking System in C++ : DE-PROX</h2>
+      </div>
+    </header>
+   <main>
+      <div id="content1">
+        <p>Building an application in C++ for attendance marking and storing in digital form(in an excel file).
+          Here are the concepts used in building the application :</p>
+        </div>
+        <div id="content2"> 
+          <ul>
+          <li>Structures</li>
+          <li>Arrays</li>
+          <li>File Handling Concepts</li>
+        </ul>
+      </div>
+         <div id="content3">
+          <p>This is how DE-PROX stores attendance of students in Excel File :</p>
+          <figure>
+         <center> <img src="dp.png" alt="Attendance Stored in Excel File"></center>
+        </figure>
+         </div>
+        
+        <div id="code">
+          <h3>Code : </h3>
+<pre>
+<p>
+
+#include"stdio.h"
+#include"stdlib.h"
+int match(int);
+  void absent();
+  struct BCA
+  {
+    int id;
+    char name[30];
+    char At;
+  };
+    int uid;
+      struct BCA stu[10] = {{1,"Anshika Nagbanshi",},{2,"Aisha",},{3,"Mahima",},{4,"Maalav",},{5,"Saad Malick",},{6,"Sparsh",},{7,"Sumati",},{8,"Pratham",},{9,"Pari",},{10,"Aakansha",}};
+    
+    int main()
+    {
+        FILE *fp;
+        int j,i,k,choose,ac=0,pc=0;
+    
+        label_1:
+        printf("\n\n\t\t<-------DE-PROX ATTENDANCE------->\n\n");
+        printf("\tChoose :\n(1).MARK ATTENDANCE\n(2).END ATTENDANCE\n(3).Show Today's Attendance\n(4).Put Attendance\n");
+        scanf("%d", &choose);
+       
+        switch (choose)
+        {
+            
+            case 1: 
+      
+          for (j = 0; j < 10; j++)
+          { 
+            reallot:
+            printf("\n\nEnter your id to mark attendance:\nPress 0 to Stop attendance\t");
+            scanf("%d", &uid);
+    
+            match(uid);
+             for (k = 0; k < 10; k++)
+            { 
+              absent();
+            }
+           if(uid>10)
+           {
+            printf("\n\t\tALERT!!!\nInvalid Id...you have to enter again enter again!!!\n");
+            goto reallot;
+           }
+            else if(uid==0)
+            {
+              goto label_1;
+           }
+           
+           
+        }
+    
+        case 2:
+            printf("\n\t\tThank You for Marking Attendance with DE-PROX\n\n");
+            printf("\t\t       <-----created by nawabSRJ----->");
+            break;
+    
+        case 3:
+            printf("Today's Class Strength:\n");
+            printf("ID\t  Name\t    Attendance\n");
+            for (i = 0; i < 10; i++)
+            {
+               
+                if(stu[i].At == 'P')
+                {
+                  pc++;
+                printf("%d  \t  %s  \t  %c\n", stu[i].id, stu[i].name, stu[i].At);
+                }
+            }
+              printf("\nThe List Of Absentees is:\n");
+              printf("ID\t  Name\t    Attendance\n");
+              for (i = 0; i < 10; i++)
+            {
+              if(stu[i].At == 'A')
+              {
+                ac++;
+                printf("%d  \t  %s  \t  %c\n", stu[i].id, stu[i].name, stu[i].At);
+              }
+            
+            }
+            printf("\n\n\t--> Present : %d\n",pc);
+            printf("\n\n\t--> Absent : %d\n",ac);
+            goto label_1;
+    
+            case 4:
+            
+            // fp=fopen("19FEB3.csv","w");
+            fp=fopen("test.xls","w");
+            fprintf(fp,"ID\t    Name\t    Attendance\n");
+              for (i = 0; i < 10; i++) 
+              {
+                fprintf(fp,"%d    \t    %s  \t     %c\n", stu[i].id, stu[i].name, stu[i].At);
+              }
+              fclose(fp);
+              printf("\n\n<-----DATA ENTERED----->\n\n");
+            printf("\n\t\tThank You for Marking Attendance with DE-PROX\n\n");
+       }
+    }
+    
+    int match(int n)
+    {
+        int j;
+        for(j=0;j<10;j++)
+        {
+          if(n==stu[j].id)
+          {
+          stu[j].At = 'P';
+          }
+        }
+    }
+    void absent()
+    {
+        int i;
+        for(i=0;i<10;i++)
+        {
+        if(stu[i].At != 'P')
+        {
+            stu[i].At = 'A';
+        }
+        }
+    }
+</p>
+</pre>       
+</div>      <br>
+
+
+  <p id="title2">
+    How Does the Code Work?
+  </p>
+    <ol id="lst">
+      <li><pre></pre>In the first step we need to think of something which can help us hold the info about all the students, so we are defining a Structure called BCA that holds  student attributes IDs, names, and attendance status.</pre> </li>
+      <br>
+      <li><pre></pre>Declaring a structure variable array named stu to store student information. Each student is assigned a unique ID and name, and the attendance status is initially empty.</pre>       
+      </li>
+      <br>
+    <li><pre></pre>Declaring a file pointer to work with files , and 'ac' and 'pc' name variables to count the number of students absent and present respectively.</pre>    
+      </li>
+      <br>
+      <li><pre></pre>In the fourth step, the code presents a menu to the user, allowing them to choose between different options. The user can mark attendance, end attendance, show today's attendance, or put attendance. The scanf function is used to capture the user's choice.</pre>       
+      </li>
+      <br>
+  <li><pre></pre>Marking Attendance: If the user selects the option to mark attendance, a loop is initiated to iterate over all the students. Within the loop, the user is prompted to enter their ID to mark their attendance. The function match is called to match the entered ID with the corresponding student. If the ID is valid, the attendance status is updated to 'P' (present). If the ID is invalid or the user wants to stop marking attendance (by entering 0), the program returns to the menu.</pre> 
+      </li>
+
+  
+    </ol>
+ 
+
+        
+     
+   </main>
+     
+ 
+</body>
+
+</html>
