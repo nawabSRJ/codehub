@@ -1,196 +1,468 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="deproxCss.css">
-  <title>DE-PROX</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="prism.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Poppins&display=swap" rel="stylesheet">
+  <title>Blog</title>
 </head>
 
-<body>
-    <header class="header">
-      <div class="title">
-        <h2>Attendance Marking System in C++ : DE-PROX</h2>
-      </div>
-    </header>
-   <main>
-      <div id="content1">
-        <p>Building an application in C++ for attendance marking and storing in digital form(in an excel file).
-          Here are the concepts used in building the application :</p>
-        </div>
-        <div id="content2"> 
-          <ul>
-          <li>Structures</li>
-          <li>Arrays</li>
-          <li>File Handling Concepts</li>
-        </ul>
-      </div>
-         <div id="content3">
-          <p>This is how DE-PROX stores attendance of students in Excel File :</p>
-          <figure>
-         <center> <img src="dp.png" alt="Attendance Stored in Excel File"></center>
-        </figure>
-         </div>
-        
-        <div id="code">
-          <h3>Code : </h3>
-<pre>
-<p>
 
+<style>
+
+*{
+        margin : 0;
+        padding: 0;
+        font-family: 'poppins';
+}
+
+
+body {
+  background-color: skyblue;
+  margin: 0;
+}
+
+.blog-container {
+  max-width: 900px;
+  margin: 20px auto;
+  background-color: white;
+  padding: 35px;
+}
+
+.blog-content {
+  color: black;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: 30px;
+  font-family: 'poppins';
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+p {
+  margin-bottom: 15px;
+}
+
+.author-container {
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: white;
+    padding: 35px;
+    margin-top: 40px; /* Added margin to separate it from the previous section */
+  }
+  
+  .author-content {
+    color: black;
+    font-family: Arial, sans-serif;
+  }
+  
+  .author-content h2 {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .author-info {
+    display: flex;
+  }
+  
+  .author-image {
+    margin-right: 20px;
+  }
+  
+  .author-image img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+  }
+  
+  .author-details h2 {
+    font-size: 30px;
+    margin-top: 25px;
+    margin-bottom: 5px;
+  }
+  
+  .author-details h3 {
+    font-size: 18px;
+    margin-top: 5px;
+  }
+  
+#pic img{
+    padding: 20px;
+    width: 650px;
+    height:600px;
+    border: 5px solid black;
+}
+  
+
+.container{
+    width: 90%;
+    height: 60%;
+    overflow: auto;
+    border-radius: 12px;
+    padding-left: 25px;
+}
+
+.code-wrap{
+    position: relative;
+}
+
+#copy-button{
+    position: absolute;
+
+    top:8px;
+    right:8px;
+    padding: 7px;
+    background-color: rgba(41, 38, 38, 0);
+    outline: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition : all 0.2s ease-in;
+    opacity: 1;
+    border:1px solid antiquewhite
+}
+
+#copy-button.show-msg {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
+}
+
+#copy-button.show-msg::after {
+  position: absolute;
+  content: "Copied";
+  visibility: visible;
+  opacity: 1;
+  color: black;
+  background-color: greenyellow;
+  /* *---------- */
+  position: absolute;
+  top:8px;
+  right:8px;
+  padding: 7px;
+  outline: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+
+
+#copy-button:hover{
+    background-color:greenyellow;
+    color: black;
+}
+
+.code-wrap:hover #copy-button{
+    opacity: 1;
+}
+
+
+#lst{
+    margin-top: 15px;
+    font-size: 23px;
+    font-weight: 300px;
+    padding-left: 35px;
+    padding-right: 20px;
+    margin-bottom: 40px;
+}
+
+#title2{
+    padding-left: 10px;
+    font-size: 35px;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+}
+ul{
+    padding-left: 30px;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.blog-content p{
+    font-size: 20px;
+    font-weight: 700px;
+}
+.author-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0px;
+  }
+  
+  .btn {
+    display: grid;
+    place-items: center;
+    background: #e3edf7;
+    padding: 1.4em;
+    border-radius: 10px;
+    box-shadow: 6px 6px 10px -1px rgba(0,0,0,0.15),
+                -6px -6px 10px -1px rgba(255,255,255,0.7);
+    border: 1px solid rgba(0,0,0,0);
+    cursor: pointer;
+    transition: transform 0.5s;
+     margin-left: 10px;
+  }
+  
+  .btn:hover {
+    box-shadow: inset 4px 4px 6px -1px rgba(0,0,0,0.2),
+                inset -4px -4px 6px -1px rgba(255,255,255,0.7),
+                -0.5px -0.5px 0px rgba(255,255,255,1),
+                0.5px 0.5px 0px rgba(0,0,0,0.15),
+                0px 12px 10px -10px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.1);
+    transform: translateY(0.5em);
+  }
+  
+  .btn svg {
+    transition: transform 0.5s;
+  }
+  
+  .btn:hover svg {
+    transform: scale(0.9);
+    fill: #333333;
+  }
+  
+  
+</style>
+
+
+<body>
+    <div class="blog-container">
+        <div class="blog-content">
+          <h1>Attendance Marking System in C++</h1>
+          <p>Building an application in C++ for attendance marking and storing in digital form (in an excel file). Here are the concepts used in building the application:</p>
+          <ul>
+            <li>Structures</li>
+            <li>Arrays</li>
+            <li>File Handling Concepts</li>
+          </ul>
+          <p>This is how DE-PROX stores attendance of students in Excel File:</p>
+          <figure id="pic">
+            <center> <img src="dp.png" alt="Attendance Stored in Excel File"></center>
+           </figure>
+
+           <div id="code">
+            <h3>Code:</h3>
+            <div class="container">
+              <div class="code-wrap">
+                  <pre>
+                      <code id="code" class="language-python">
 #include"stdio.h"
 #include"stdlib.h"
 int match(int);
-  void absent();
-  struct BCA
-  {
-    int id;
-    char name[30];
-    char At;
-  };
-    int uid;
-      struct BCA stu[10] = {{1,"Anshika Nagbanshi",},{2,"Aisha",},{3,"Mahima",},{4,"Maalav",},{5,"Saad Malick",},{6,"Sparsh",},{7,"Sumati",},{8,"Pratham",},{9,"Pari",},{10,"Aakansha",}};
-    
-    int main()
-    {
-        FILE *fp;
-        int j,i,k,choose,ac=0,pc=0;
-    
-        label_1:
-        printf("\n\n\t\t<-------DE-PROX ATTENDANCE------->\n\n");
-        printf("\tChoose :\n(1).MARK ATTENDANCE\n(2).END ATTENDANCE\n(3).Show Today's Attendance\n(4).Put Attendance\n");
-        scanf("%d", &choose);
-       
-        switch (choose)
-        {
-            
-            case 1: 
+void absent();
+struct BCA
+{
+  int id;
+  char name[30];
+  char At;
+};
+int uid;
+struct BCA stu[10] = {{1,"Anshika Nagbanshi",},{2,"Aisha",},{3,"Mahima",},{4,"Maalav",},{5,"Saad Malick",},{6,"Sparsh",},{7,"Sumati",},{8,"Pratham",},{9,"Pari",},{10,"Aakansha",}};
       
-          for (j = 0; j < 10; j++)
-          { 
-            reallot:
-            printf("\n\nEnter your id to mark attendance:\nPress 0 to Stop attendance\t");
-            scanf("%d", &uid);
-    
-            match(uid);
-             for (k = 0; k < 10; k++)
-            { 
-              absent();
-            }
-           if(uid>10)
-           {
-            printf("\n\t\tALERT!!!\nInvalid Id...you have to enter again enter again!!!\n");
-            goto reallot;
-           }
-            else if(uid==0)
-            {
-              goto label_1;
-           }
-           
-           
-        }
-    
-        case 2:
-            printf("\n\t\tThank You for Marking Attendance with DE-PROX\n\n");
-            printf("\t\t       <-----created by nawabSRJ----->");
-            break;
-    
-        case 3:
-            printf("Today's Class Strength:\n");
-            printf("ID\t  Name\t    Attendance\n");
-            for (i = 0; i < 10; i++)
-            {
-               
-                if(stu[i].At == 'P')
-                {
-                  pc++;
-                printf("%d  \t  %s  \t  %c\n", stu[i].id, stu[i].name, stu[i].At);
-                }
-            }
-              printf("\nThe List Of Absentees is:\n");
-              printf("ID\t  Name\t    Attendance\n");
-              for (i = 0; i < 10; i++)
-            {
-              if(stu[i].At == 'A')
-              {
-                ac++;
-                printf("%d  \t  %s  \t  %c\n", stu[i].id, stu[i].name, stu[i].At);
-              }
-            
-            }
-            printf("\n\n\t--> Present : %d\n",pc);
-            printf("\n\n\t--> Absent : %d\n",ac);
-            goto label_1;
-    
-            case 4:
-            
-            // fp=fopen("19FEB3.csv","w");
-            fp=fopen("test.xls","w");
-            fprintf(fp,"ID\t    Name\t    Attendance\n");
-              for (i = 0; i < 10; i++) 
-              {
-                fprintf(fp,"%d    \t    %s  \t     %c\n", stu[i].id, stu[i].name, stu[i].At);
-              }
-              fclose(fp);
-              printf("\n\n<-----DATA ENTERED----->\n\n");
-            printf("\n\t\tThank You for Marking Attendance with DE-PROX\n\n");
-       }
-    }
-    
-    int match(int n)
-    {
-        int j;
-        for(j=0;j<10;j++)
-        {
-          if(n==stu[j].id)
-          {
-          stu[j].At = 'P';
-          }
-        }
-    }
-    void absent()
-    {
-        int i;
-        for(i=0;i<10;i++)
-        {
-        if(stu[i].At != 'P')
-        {
-            stu[i].At = 'A';
-        }
-        }
-    }
-</p>
-</pre>       
-</div>      <br>
-
-
-  <p id="title2">
-    How Does the Code Work?
-  </p>
-    <ol id="lst">
-      <li><pre></pre>In the first step we need to think of something which can help us hold the info about all the students, so we are defining a Structure called BCA that holds  student attributes IDs, names, and attendance status.</pre> </li>
-      <br>
-      <li><pre></pre>Declaring a structure variable array named stu to store student information. Each student is assigned a unique ID and name, and the attendance status is initially empty.</pre>       
-      </li>
-      <br>
-    <li><pre></pre>Declaring a file pointer to work with files , and 'ac' and 'pc' name variables to count the number of students absent and present respectively.</pre>    
-      </li>
-      <br>
-      <li><pre></pre>In the fourth step, the code presents a menu to the user, allowing them to choose between different options. The user can mark attendance, end attendance, show today's attendance, or put attendance. The scanf function is used to capture the user's choice.</pre>       
-      </li>
-      <br>
-  <li><pre></pre>Marking Attendance: If the user selects the option to mark attendance, a loop is initiated to iterate over all the students. Within the loop, the user is prompted to enter their ID to mark their attendance. The function match is called to match the entered ID with the corresponding student. If the ID is valid, the attendance status is updated to 'P' (present). If the ID is invalid or the user wants to stop marking attendance (by entering 0), the program returns to the menu.</pre> 
-      </li>
-
+int main()
+{
+  FILE *fp;
+  int j,i,k,choose,ac=0,pc=0;
   
-    </ol>
- 
+  label_1:
+  printf("\n\n\t\t<-------DE-PROX ATTENDANCE------->\n\n");
+  printf("\tChoose :\n(1).MARK ATTENDANCE\n(2).END ATTENDANCE\n(3).Show Today's Attendance\n(4).Put Attendance\n");
+  scanf("%d", &choose);
+  
+  switch (choose)
+  {
+    case 1:
+      for (j = 0; j < 10; j++)
+      { 
+        reallot:
+        printf("\n\nEnter your id to mark attendance:\nPress 0 to Stop attendance\t");
+        scanf("%d", &uid);
+  
+        match(uid);
+        for (k = 0; k < 10; k++)
+        { 
+          absent();
+        }
+        if(uid>10)
+        {
+          printf("\n\t\tALERT!!!\nInvalid Id...you have to enter again enter again!!!\n");
+          goto reallot;
+        }
+        else if(uid==0)
+        {
+          goto label_1;
+        }
+      }
+      break;
+  
+    case 2:
+      printf("\n\t\tThank You for Marking Attendance with DE-PROX\n\n");
+      printf("\t\t       <-----created by Srajan----->");
+      break;
+  
+    case 3:
+      printf("Today's Class Strength:\n");
+      printf("ID\t  Name\t    Attendance\n");
+      for (i = 0; i < 10; i++)
+      {
+        if(stu[i].At == 'P')
+        {
+          pc++;
+          printf("%d  \t  %s  \t  %c\n", stu[i].id, stu[i].name, stu[i].At);
+        }
+      }
+      printf("\nThe List Of Absentees is:\n");
+      printf("ID\t  Name\t    Attendance\n");
+      for (i = 0; i < 10; i++)
+      {
+        if(stu[i].At == 'A')
+        {
+          ac++;
+          printf("%d  \t  %s  \t  %c\n", stu[i].id, stu[i].name, stu[i].At);
+        }
+      }
+      printf("\n\n\t--> Present : %d\n",pc);
+      printf("\n\n\t--> Absent : %d\n",ac);
+      goto label_1;
+  
+    case 4:
+      // fp=fopen("19FEB3.csv","w");
+      fp=fopen("test.xls","w");
+      fprintf(fp,"ID\t    Name\t    Attendance\n");
+      for (i = 0; i < 10; i++) 
+      {
+        fprintf(fp,"%d    \t    %s  \t     %c\n", stu[i].id, stu[i].name, stu[i].At);
+      }
+      fclose(fp);
+      printf("\n\n<-----DATA ENTERED----->\n\n");
+      printf("\n\t\tThank You for Marking Attendance with DE-PROX\n\n");
+      break;
+  }
+}
 
-        
+int match(int n)
+{
+  int j;
+  for(j=0;j<10;j++)
+  {
+    if(n==stu[j].id)
+    {
+      stu[j].At = 'P';
+    }
+  }
+}
+
+void absent()
+{
+  int i;
+  for(i=0;i<10;i++)
+  {
+    if(stu[i].At != 'P')
+    {
+      stu[i].At = 'A';
+    }
+  }
+}
+                      </code>
+                  </pre>
+                  <button id="copy-button">Copy</button>
+              </div>
+          </div>
+          </div>
+
+          <p id="title2">
+            How Does the Code Work?
+          </p>
+
+        </p>
+        <ol id="lst">
+          <li><pre></pre>In the first step we need to think of something which can help us hold the info about all the students, so we are defining a Structure called BCA that holds  <b>student attributes IDs, names, and attendance status.</b></pre> </li>
+          <br>
+          <li><pre></pre>Declaring a structure variable array named <b>stu</b> to store student information. Each student is assigned a unique ID and name, and the attendance status is initially empty.</pre>       
+          </li>
+          <br>
+        <li><pre></pre>Declaring a file pointer to work with files , and 'ac' and 'pc' name variables to count the number of students absent and present respectively.</pre>    
+          </li>
+          <br>
+          <li><pre></pre>In the fourth step, the code presents a menu to the user, allowing them to choose between different options. The user can mark attendance, end attendance, show today's attendance, or put attendance. The scanf function is used to capture the user's choice.</pre>       
+          </li>
+          <br>
+      <li><pre></pre><b>Marking Attendance</b>: If the user selects the option to mark attendance, a loop is initiated to iterate over all the students. Within the loop, the user is prompted to enter their ID to mark their attendance. The function match is called to match the entered ID with the corresponding student. If the ID is valid, the attendance status is updated to 'P' (present). If the ID is invalid or the user wants to stop marking attendance (by entering 0), the program returns to the menu.</pre> 
+          </li>
+    
+      
+        </ol>
      
-   </main>
-     
- 
+
+
+        </div>
+      </div>
+    
+      <div class="author-container">
+        <div class="author-content">
+            <h2>About the Author</h2>
+          <div class="author-info">
+            <div class="author-image">
+              <img src="Srj_pic.png" alt="Author Image">
+            </div>
+            <div class="author-details">
+              <h2>Srajan Saxena</h2>
+              <h3>Student | 18 years</h3>
+            </div>
+          </div>
+          <div class="author-button">
+           
+            <button class="btn"><a href="https://www.instagram.com/im_srj07/?next=%2F" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                    <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+                  </svg></a></button>
+            <button class="btn"><a href="https://github.com/nawabSRJ" target="_blank">
+              <svg width="40" height="40" fill="#0092E4" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24" id="github">
+                <path d="M12,2.2467A10.00042,10.00042,0,0,0,8.83752,21.73419c.5.08752.6875-.21247.6875-.475,0-.23749-.01251-1.025-.01251-1.86249C7,19.85919,6.35,18.78423,6.15,18.22173A3.636,3.636,0,0,0,5.125,16.8092c-.35-.1875-.85-.65-.01251-.66248A2.00117,2.00117,0,0,1,6.65,17.17169a2.13742,2.13742,0,0,0,2.91248.825A2.10376,2.10376,0,0,1,10.2,16.65923c-2.225-.25-4.55-1.11254-4.55-4.9375a3.89187,3.89187,0,0,1,1.025-2.6875,3.59373,3.59373,0,0,1,.1-2.65s.83747-.26251,2.75,1.025a9.42747,9.42747,0,0,1,5,0c1.91248-1.3,2.75-1.025,2.75-1.025a3.59323,3.59323,0,0,1,.1,2.65,3.869,3.869,0,0,1,1.025,2.6875c0,3.83747-2.33752,4.6875-4.5625,4.9375a2.36814,2.36814,0,0,1,.675,1.85c0,1.33752-.01251,2.41248-.01251,2.75,0,.26251.1875.575.6875.475A10.0053,10.0053,0,0,0,12,2.2467Z"></path>
+              </svg></a></button>
+          </div>
+        </div>
+      </div>
+      
+      
 </body>
 
+<script src="prism.js"></script>
+<script>
+  // Get the copy button element
+  const copyButton = document.getElementById("copy-button");
+
+  // Add click event listener to the copy button
+  copyButton.addEventListener("click", function() {
+    // Select the code inside the code element
+    const codeElement = document.getElementById("code");
+    const range = document.createRange();
+    range.selectNode(codeElement);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+
+    // Copy the selected code to clipboard
+    document.execCommand("copy");
+    window.getSelection().removeAllRanges();
+
+    // Change the button text to "Copied" temporarily
+    copyButton.textContent = "Copied";
+    copyButton.classList.add("show-msg");
+    setTimeout(function() {
+      copyButton.textContent = "Copy";
+      copyButton.classList.remove("show-msg");
+    }, 2000);
+  });
+</script>
 </html>
