@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="prism.css">
   <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Poppins&display=swap" rel="stylesheet">
-  <title>Result Retrieval Automation</title>
+  <title>WPM Counter</title>
 </head>
 
 
@@ -239,20 +239,33 @@ ul{
 <body>
     <div class="blog-container">
         <div class="blog-content">
-          <h1>Automating Result Retrieval of Students Using Selenium and Python</h1>
-          <p>Introduction: In today's digital age, automation has become an essential tool to simplify repetitive tasks. As a BCA (Bachelor of Computer Applications) student, keeping track of your classmates' results can be time-consuming, especially when you have a large class. In this article, we will explore how to automate the process of fetching BCA department results, allowing you to obtain your classmates' scores quickly and efficiently using Python and the Selenium library.</p>
-          <p>Prerequisites: Before we delve into the automation process, ensure you have the following:</p>
+          <h1>Code to calculate typing speed</h1>
+          <p>Introduction: In this blog we will learn how to make a Word Per Minute Counter in C language</p>
+
+          <p>Header file used in this code:</p>
           <ul>
-            <li>Python Installed: If you haven't installed Python yet, visit the official Python website (https://www.python.org/) and download the latest version for your operating system.
-            </li>
+            <li>1.	conio.h            </li>
             <br>
 
-            <li>Selenium Library: Selenium is a powerful web automation tool, and you can install it using pip: <strong>pip install selenium </strong></li>
+            <li>2.	time.h</li>
             <br>
 
-            <li>Chrome WebDriver: Since we'll be using the Chrome browser for automation, you need to download the corresponding Chrome WebDriver. Make sure it matches your Chrome browser version and place it in your system's PATH.</li>
+            <li>3.	stdio.h</li>
+          </ul>
+          <p>Concepts used in this code:</p>
+          <ul>
+            <li>1.Concept of loops         </li>
+            <br>
+
+            <li>2.	Concept of clock() function </li>
+            <br>
+
+            <li>3.	Concept of "array of characters"</li>
           </ul>
           
+          <figure id="pic">
+            <center> <img src="blog2_pic.png" alt="Attendance Stored in Excel File"></center>
+           </figure>
 
          
 
@@ -261,53 +274,57 @@ ul{
             <div class="container">
               <div class="code-wrap">
                   <pre>
-                      <code id="code" class="language-python">
-from selenium import webdriver
-import time
-driver=webdriver.Chrome()
-driver.get("https://result.npgc.in/")
-time.sleep(3)
-file=open("results.txt","w")
-data=""
+<code id="code" class="language-python">
+#include <stdio.h>
+#include <time.h>
+#include <conio.h>
+#define max 500
 
+int main()
 
-for i in range(1,72):
-    if(i<10):
-        time.sleep(1)
-        roll="72200"+str(i)
-        driver.find_element(by="xpath", value="/html/body/form/div[3]/div[2]/div/div/article/div[5]/div[1]/input").clear()
-        driver.find_element(by="xpath", value="/html/body/form/div[3]/div[2]/div/div/article/div[5]/div[1]/input").send_keys(roll)
-        driver.find_element(by="xpath", value="/html/body/form/div[3]/div[2]/div/div/article/div[5]/div[2]/input").click()
-        time.sleep(1)
-        try:
-            name=driver.find_element(by="xpath",value="/html/body/form/div[3]/div[2]/div/article/div[4]/table/tbody/tr[2]/td[3]/span").text
-            text=driver.find_element(by="xpath",value="/html/body/form/div[3]/div[2]/div/article/div[7]/div/p/span").text
-            print(roll,name,text)
-            data=data+"\n"+roll+" "+name+" "+text
-            driver.back()
-        except:
-            print("Roll no not registered")
+{
+    
+   char str[max];
+   int t1, i = 0, sc = 0;
+   printf("\nStart Typing: \n");
+   printf("\nEnter number of seconds:");
+   scanf("%d", &t1);
+   clock_t start = clock();
+    
+    while (start < 1000 * t1)
 
+    {
+    
+       start = clock();
+       str[i] = getch();
+        printf("%c", str[i]);
 
-    else:
-        roll="7220"+str(i)
-        time.sleep(1)
-        driver.find_element(by="xpath", value="/html/body/form/div[3]/div[2]/div/div/article/div[5]/div[1]/input").clear()
-        driver.find_element(by="xpath", value="/html/body/form/div[3]/div[2]/div/div/article/div[5]/div[1]/input").send_keys(roll)
-        driver.find_element(by="xpath", value="/html/body/form/div[3]/div[2]/div/div/article/div[5]/div[2]/input").click()
-        time.sleep(1)
-        try:
-            name=driver.find_element(by="xpath",value="/html/body/form/div[3]/div[2]/div/article/div[4]/table/tbody/tr[2]/td[3]/span").text
-            text=driver.find_element(by="xpath",value="/html/body/form/div[3]/div[2]/div/article/div[7]/div/p/span").text
-            print(roll,name,text)
-            data=data+"\n"+roll+" "+name+" "+text
-            driver.back()
-        except:
-            print("Roll no not registered")
-file.write(data)
-file.close()
- 
-                      </code>
+        i++;
+    }
+    str[i] = '\0';
+    printf("\nTime is OVER!!!\n");
+    printf("Paragraph Entered: \n%s\n", str);
+    
+    for (i = 0; str[i] != '\0'; i++)
+    {
+    
+       // to avoid last space being counted
+       if (str[i] == ' ' && str[i + 1] == '\0')
+       {
+           continue;
+       }
+      if (str[i] == ' ')
+       {
+        sc++;
+       }
+    }
+       // *WPM -> Words Per Minute
+     printf("\nWPM = %d\n", (sc + 1) * 60 / t1);
+      return 0;
+}
+        
+
+</code>
                   </pre>
                   <button id="copy-button">Copy</button>
               </div>
@@ -315,57 +332,65 @@ file.close()
           </div>
 
           <p id="title2">
-            Understanding the Script: Let's break down the Python script provided above, which automates the process of fetching BCA results from a specific website.
+            Working of the code:
 
           </p>
 
         </p>
+        <p>This C program is designed to measure your typing speed in words per minute (WPM). It prompts you to start typing and sets a time limit for the typing session. Once the time is up, it calculates the number of words you typed and calculates your typing speed in WPM.
+
+          Here's a step-by-step explanation of the code:
+          </p>
         <ol id="lst">
-          <li><pre></pre>The script starts by importing the necessary libraries: webdriver from Selenium for browser automation and time for introducing delays in the script.
+          <li><pre></pre>The code includes the necessary header files: `stdio.h` for standard input/output, `time.h` for time-related functions, and `conio.h` for console input/output.
           </pre> </li>
           <br>
-          <li><pre>Initialize Chrome WebDriver: 
-            driver = webdriver.Chrome()
-            driver.get("https://result.npgc.in/")
-            time.sleep(3)
+          <li><pre></pre>The constant `max` is defined with a value of 500, which represents the maximum length of the input string `str`.The `main` function begins.
 
-Here, we initialize the Chrome WebDriver and navigate to the website
-"https://result.npgc.in/," which hosts the BCA department results.</pre>
             </li>
           <br>
 
-        <li><pre>Fetch Results and Store in a Text File:
-          file = open("results.txt", "w")
-          data = ""</pre>
+        <li><pre>A character array `str` is declared to store the user's input.</pre>
           </pre>    
           </li>
           <br>
-          <li><pre></pre>The loop iterates through the roll numbers of your classmates, automatically inputs each roll number into the search field on the website, retrieves the corresponding result, and stores the data in the data variable.
+          <li><pre></pre>Integer variables `t1`, `i`, and `sc` are declared. `t1` will store the number of seconds for the typing session, `i` is used as a loop counter for the input string, and `sc` is the word count.
           </pre>       
           </li>
           <br>
-      <li><pre></pre>If a roll number is <b>not</b> registered or an <b>error</b> occurs during data extraction, the script will handle it gracefully and print a message.
-       <pre> try:
-    # Extract name and result text
-except:
-    print("Roll no not registered")
-    
-  </pre>
+      <li><pre></pre>The program prompts the user to start typing by displaying "Start Typing:".It then asks the user to enter the number of seconds for the typing session using `scanf`.
           </li>
-          <li><pre></pre>Write Data to File:
-            <pre>
-
-file.write(data)
-file.close()
-
-Once the loop finishes, the collected data is written to a text file named 
-<b>"results.txt."</b>
-
-            </pre>
+          <br>
+          <li><pre></pre>The program records the starting time of the typing session using `clock()` function and stores it in the variable `start`.
+        
           </li>
+<br>
+          <li><pre></pre>The main typing loop begins. It will run until the elapsed time (calculated using `clock()`) exceeds the specified time (`t1`) for the typing session.</li>
+<br>
+          <li><pre></pre>Inside the loop:
+          <pre>
+
+a. The program reads a character from the user's input using `getch()`
+and stores it in the current position of the `str` array.
+
+b. The character is displayed on the screen using `printf`.
+
+c. The loop counter `i` is incremented.
+          </pre></li>
+<br>
+          <li><pre></pre>After the loop ends, the null terminator ('\0') is added to the end of the input string to mark its end.</li>
+<br>
+          <li><pre></pre>The program prints "Time is OVER!!!" to notify the user that the typing time is up.. It then displays the paragraph entered by the user.</li>
+<br>
+          <li><pre></pre>The program now calculates the number of words typed by iterating through the `str` array and counting the spaces.</li>
+<br>
+          <li><pre></pre>. The typing speed in words per minute (WPM) is calculated using the formula: WPM = (number of words + 1) * 60 / t1.</li>
+<br>
+          <li><pre></pre>The calculated WPM value is displayed on the screen.The `main` function returns 0, indicating successful completion</li>
       
         </ol>
      
+        <p>Please note that the <b>`conio.h`</b> header is <b>not</b> standard in C and may not be available on all systems. If you encounter any issues related to `conio.h`, you can consider using alternative methods for handling input without blocking the terminal.</p>
 
 
         </div>
@@ -376,23 +401,24 @@ Once the loop finishes, the collected data is written to a text file named
             <h2>About the Author</h2>
           <div class="author-info">
             <div class="author-image">
-              <img src="pb_pic2.png" alt="Author Image">
+              <img src="author3_pic.jpg" alt="Author Image">
             </div>
             <div class="author-details">
-              <h2>Priyanshu Batham</h2>
+              <h2>Pratham Gupta</h2>
               <h3>Student | 18 years</h3>
             </div>
           </div>
           <div class="author-button">
-            <button class="btn"><a href="https://www.linkedin.com/in/priyanshu-batham-0a57b2249/" target="_blank">
+           
+            <button class="btn"><a href="https://www.linkedin.com/in/pratham-gupta-73a380255/" target="_blank">
               <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
                 <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
               </svg>
-            <button class="btn"><a href="https://www.instagram.com/priyanshu_batham_1/" target="_blank">
+            <button class="btn"><a href="https://www.instagram.com/pratham735505/" target="_blank">
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
                     <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
                   </svg></a></button>
-            <button class="btn"><a href="https://github.com/Priyanshu-Batham" target="_blank">
+            <button class="btn"><a href="https://github.com/Pratham735505" target="_blank">
               <svg width="40" height="40" fill="#0092E4" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24" id="github">
                 <path d="M12,2.2467A10.00042,10.00042,0,0,0,8.83752,21.73419c.5.08752.6875-.21247.6875-.475,0-.23749-.01251-1.025-.01251-1.86249C7,19.85919,6.35,18.78423,6.15,18.22173A3.636,3.636,0,0,0,5.125,16.8092c-.35-.1875-.85-.65-.01251-.66248A2.00117,2.00117,0,0,1,6.65,17.17169a2.13742,2.13742,0,0,0,2.91248.825A2.10376,2.10376,0,0,1,10.2,16.65923c-2.225-.25-4.55-1.11254-4.55-4.9375a3.89187,3.89187,0,0,1,1.025-2.6875,3.59373,3.59373,0,0,1,.1-2.65s.83747-.26251,2.75,1.025a9.42747,9.42747,0,0,1,5,0c1.91248-1.3,2.75-1.025,2.75-1.025a3.59323,3.59323,0,0,1,.1,2.65,3.869,3.869,0,0,1,1.025,2.6875c0,3.83747-2.33752,4.6875-4.5625,4.9375a2.36814,2.36814,0,0,1,.675,1.85c0,1.33752-.01251,2.41248-.01251,2.75,0,.26251.1875.575.6875.475A10.0053,10.0053,0,0,0,12,2.2467Z"></path>
               </svg></a></button>

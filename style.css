@@ -253,7 +253,7 @@ background-image: url(CN1_cover.png);
 .card svg {
   width: 48px;
   fill: #333;
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  transition: all 0.1s cubic-bezier(0.23, 1, 0.320, 1);
 }
 
 .card:hover {
