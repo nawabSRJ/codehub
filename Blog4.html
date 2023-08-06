@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="java_prism.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Poppins&display=swap" rel="stylesheet">
+  <title>Chocolate Problem</title>
+</head>
+<style>
+ 
+*{
+    margin : 0;
+    padding: 0;
+    font-family: 'poppins';
+}
+
+
+body {
+background-color: #FF8787;
+background-image: url(Bg3.png);
+background-repeat: repeat-x;
+margin: 0;
+}
+
+
+.blog-container {
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: white;
+    padding: 35px;
+  }
+  
+  h1 {
+    font-size: 35px;
+    font-family: 'poppins';
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    margin-bottom: 15px;
+  }
+
+  
+.blog-content {
+    color: black;
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+  }
+
+  
+.blog-content p{
+    font-size: 22px;
+    font-weight: 700px;
+}
+
+.container{
+    width: 95%;
+    height: 60%;
+    overflow: auto;
+    border-radius: 12px;
+    padding-left: 25px;
+}
+
+.code-wrap{
+    position: relative;
+}
+
+
+#copy-button{
+    position: absolute;
+
+    top:8px;
+    right:8px;
+    padding: 7px;
+    background-color: rgba(41, 38, 38, 0);
+    outline: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition : all 0.2s ease-in;
+    opacity: 1;
+    border:1px solid antiquewhite
+}
+
+#copy-button.show-msg {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
+}
+
+#copy-button.show-msg::after {
+  position: absolute;
+  content: "Copied";
+  visibility: visible;
+  opacity: 1;
+  color: black;
+  background-color: greenyellow;
+  /* *---------- */
+  position: absolute;
+  top:8px;
+  right:8px;
+  padding: 7px;
+  outline: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+
+
+#copy-button:hover{
+    background-color:greenyellow;
+    color: black;
+}
+
+.code-wrap:hover #copy-button{
+    opacity: 1;
+}
+
+
+
+.author-container {
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: white;
+    padding: 35px;
+    margin-top: 40px; /* Added margin to separate it from the previous section */
+  }
+  
+  .author-content {
+    color: black;
+    font-family: Arial, sans-serif;
+  }
+  
+  .author-content h2 {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .author-info {
+    display: flex;
+  }
+  
+  .author-image {
+    margin-right: 20px;
+  }
+  
+  .author-image img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+  }
+  
+  .author-details h2 {
+    font-size: 30px;
+    margin-top: 25px;
+    margin-bottom: 5px;
+  }
+  
+  .author-details h3 {
+    font-size: 18px;
+    margin-top: 5px;
+  }
+  
+#pic img{
+    padding: 20px;
+    width: 650px;
+    height:600px;
+    border: 5px solid black;
+}
+#lst{
+    margin-top: 15px;
+    font-size: 23px;
+    font-weight: 300px;
+    padding-left: 35px;
+    padding-right: 20px;
+    margin-bottom: 40px;
+}
+
+</style>
+
+
+
+<body>
+  <div class="blog-container">
+    <div class="blog-content">
+      <h1>Chocolate Distribution Problem</h1>
+      <p>Given an array A[] of positive integers of size N, where each value represents the number of chocolates in a packet. Each packet can have a variable number of chocolates. There are M students, the task is to distribute chocolate packets among M students such that :</p>
+      <ol id="lst">
+        <li>Each student gets exactly one packet.</li>
+        <li>The difference between the maximum number of chocolates given to a student and the minimum number of chocolates given to a student is minimum.</li>
+      </ol>
+      <h2>Example</h2>
+      <p>Input:<br>
+        N = 8, M = 5<br>
+        A = {3, 4, 1, 9, 56, 7, 9, 12}<br>
+        Output: 6<br>
+        Explanation: The minimum difference between maximum chocolates and minimum chocolates is 9 - 3 = 6 by choosing the following M packets : {3, 4, 9, 7, 9}.</p>
+
+      <h2>Solution</h2>
+      <p>We can solve the above problem with the approach of sorting the list first then calculating the difference between the maximum and minimum number of chocolates given to a student by dividing the ArrayList into m sized contiguous subarrays and calculating the respective differences and then finding the minimum difference among them.</p>
+      
+      <div class="code">
+        <h2>Code :</h2>
+        <div class="container">
+            <div class="code-wrap">
+                <pre>
+                    <code id="code" class="language-java">
+import java.util.*;
+public class ChocolateDistribution
+{
+      public static long findMinDiff(ArrayList< Integer> a,int n,int m)
+    {
+        long min,curmin;
+        int i,j,t;
+               
+        if(n< m)
+        {
+            System.out.println("Number of chocolates cannot be less than the number of students.");
+            System.exit(0);
+        }
+        if(n==0||m==0)
+        {
+            System.out.println("Either no chocolates or no students");
+            System.exit(0);
+        }
+        
+        Collections.sort(a);//sorting the ArrayList
+                
+        min=a.get(m-1)-a.get(0);//1st time min will be difference btw max and min value of 1st subarray of size m
+        //for loop till the index of max value of the last contiguous subarray of size m is less than n
+        for(i=0;i+m-1< n;i++)
+        {
+            curmin=a.get(i+m-1)-a.get(i);//finding diff btw max and min chocolates in the contiguous subarrays
+            if(curmin < min)
+             min=curmin;//finding the minimum difference btw max and min no. of chocolates given to a student          
+        }
+        return min;
+    }
+    public static void main()
+    {
+        int n,m,i,x;
+        long mindiff;
+        
+        //Creating a list of numbers or chocolates
+        ArrayList < Integer> a=new ArrayList< Integer>();
+        
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Input array size:");
+        n=sc.nextInt();
+        
+        System.out.println("Input ArrayList elements:");
+        for(i=0;i< n;i++)
+        {
+            x=sc.nextInt();
+            a.add(x);
+        }
+        
+        System.out.println("Input the number of students:");
+        m=sc.nextInt();
+        
+        mindiff=findMinDiff(a,n,m);
+        System.out.println("Difference:"+mindiff);
+    }
+}
+                        
+                    </code>
+                </pre>
+                <button id="copy-button">Copy</button>
+            </div>
+          </div>
+        </div>
+    </div>
+           
+</div>   
+      <div class="author-container">
+        <div class="author-content">
+            <h2>About the Author</h2>
+          <div class="author-info">
+            <div class="author-image">
+              <img src="authorPic4.png" alt="Author Image">
+            </div>
+            <div class="author-details">
+              <h2>Mahima Manni</h2>
+              <h3>Student</h3>
+            </div>
+          
+        </div>
+      </div>
+
+
+
+
+  
+</body>
+<script src="java_prism.js"></script>
+<script>
+    // Get the copy button element
+    const copyButton = document.getElementById("copy-button");
+  
+    // Add click event listener to the copy button
+    copyButton.addEventListener("click", function() {
+      // Select the code inside the code element
+      const codeElement = document.getElementById("code");
+      const range = document.createRange();
+      range.selectNode(codeElement);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+  
+      // Copy the selected code to clipboard
+      document.execCommand("copy");
+      window.getSelection().removeAllRanges();
+  
+      // Change the button text to "Copied" temporarily
+      copyButton.textContent = "Copied";
+      copyButton.classList.add("show-msg");
+      setTimeout(function() {
+        copyButton.textContent = "Copy";
+        copyButton.classList.remove("show-msg");
+      }, 2000);
+    });
+  </script>
+</html>
